@@ -81,8 +81,8 @@ X_pysr[:, 2] = X_pysr[:, 1] + X_pysr[:, 2]
 template = TemplateExpressionSpec(
     expressions = ["g"],
     variable_names = ["x1", "x2", "x3", "x4"],  #H0, ombh2, ombh2+omch2, ells
-    parameters = {"beta": 6},  #parameters to vary in the model to create equation - index from 1
-    combine = "1 + (beta[1]*(x4/beta[2])^(g(x2, x3)) - 1)*(-1/tanh(beta[3]*(x4-beta[4])))^-1 * sin(beta[5] * x4 + beta[6])" #find equation of this form
+    parameters = {"beta": 4},  #parameters to vary in the model to create equation - index from 1
+    combine = "1 + (beta[1]*(x4/beta[2])^(g(x2, x3)) - 1)*(1 + exp(-(x4-beta[3])/(100+400*Float32(0.7)^abs(beta[4]))))^-1"   #find equation of this form
 )
 
 # PySR Model
