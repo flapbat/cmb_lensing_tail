@@ -23,9 +23,9 @@ plt.rcParams['font.family'] = 'stixgeneral'
 
 # Load Data
 
-pars     = np.load('CL_data/parameter_test.npy')  # [H0, ombh2, omch2 ] x 100
-lensed   = np.load('CL_data/lensed_CL.npy')     # [C_2, ..., C_5000] x 100 (lensed)
-unlensed = np.load('CL_data/unlensed_CL.npy')     # [C_2, ..., C_5000] x 100 (unlensed)
+pars     = np.load('CL_data/parameter_test2.npy')  # [H0, ombh2, omch2 ] x 100
+lensed   = np.load('CL_data/lensed_CL2.npy')     # [C_2, ..., C_5000] x 100 (lensed)
+unlensed = np.load('CL_data/unlensed_CL2.npy')     # [C_2, ..., C_5000] x 100 (unlensed)
 
 
 # In[4]:
@@ -81,17 +81,20 @@ X_pysr[:, 2] = X_pysr[:, 1] + X_pysr[:, 2]
 template = TemplateExpressionSpec(
     expressions = ["g"],
     variable_names = ["x1", "x2", "x3", "x4"],  #H0, ombh2, ombh2+omch2, ells
-    parameters = {"beta": 4},  #parameters to vary in the model to create equation - index from 1
+    parameters = {"beta": 2},  #parameters to vary in the model to create equation - index from 1
     combine = """
-        sigmoid(z) = 1 / (1+exp(-z))
         
-        soft_clamp(z, lo, hi) = sigmoid(z)* (hi-lo) + lo
+        beta3 = 3776 * (1 + (x3*Float32(1/0.1424)) * beta[1]*Float32(0.001))
         
-        clamped_beta_3 = soft_clamp(beta[3], 1500, 2500)
+        beta4 = 341 * (1 + (x3*Float32(1/0.1424)) * beta[2]*Float32(0.001))
         
-        clamped_beta_4 = soft_clamp(beta[4], 100, 600)
+        alpha = x3/Float32(0.1424) * Float32(1/0.4)
+        
+        sigma = (1 + exp(-(x4-beta3)/beta4))^(-1)
 
-        1 + (beta[1]*(x4/beta[2])^(g(x2, x3)) - 1)*(1 + exp(-(x4-clamped_beta_3)/clamped_beta_4))^-1
+        poly = (Float32(0.7)*(x4/2800)^alpha - 1)
+        
+        1 + poly*sigma + g(x2) * 0
 
 
     """  
