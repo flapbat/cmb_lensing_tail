@@ -56,15 +56,15 @@ template = TemplateExpressionSpec(
     variable_names = ["H0", "x1", "x2", "x5", "x6", "ell"],  #H0, ombh2, omch2, a_s, n_s
     combine = """
         
-        beta1 =  Float32(0.6838)  * (1 + Float32(0.6785)  * x1 + Float32(5.1423) * x1 ^2 +Float32(-0.0394) * x2 + Float32(1.1529) * x1 * x2 + Float32(0.00295) * x5 + Float32(0.0772) * x5^2 + Float32(0.02447) * x2 * x5)
+        beta1 =  Float32(0.6838)  * (1 + Float32(0.6785)  * x1 + Float32(5.1423) * x1 ^2 +Float32(-0.0394) * x2 + Float32(1.1529) * x1 * x2 + Float32(0.00295) * x5 + Float32(0.0772) * x5^2 + Float32(0.02447) * x2 * x5 + Float32(0.21970498) * x1 * x5)
         
         beta2 = Float32(2803.1562) * (1 + Float32(-0.2020) * x1 + Float32(-0.1305) * x2 + Float32(-0.03670) * x1 ^ 2 + Float32(0.1632) * x2 ^2 + Float32(0.01521) * x1 * x2 + Float32(0.01288)  * x5 + Float32(-0.1299) * x5^2 + Float32(-0.0278) * x2 * x5)
         
-        beta3 = Float32(3752.098) * (1 + Float32(0.7636) * x1 + Float32(-0.4728) * x2  + Float32(0.3576) * x2^2  + Float32(0.5453) * x1^2 + 1 * x1 * x2 + Float32(-0.1017) * x5 + Float32(0.1915)  * x5^2 + Float32(1.1921) * x2 * x5 + Float32(-1.2684) * x1 * x5 + Float32(-0.18363248) * x6 + Float32(0.27718007) * x6 ^2 )
+        beta3 = Float32(3752.098) * (1 + Float32(0.7636) * x1 + Float32(-0.4728) * x2  + Float32(0.3576) * x2^2  + Float32(0.5453) * x1^2 + Float32(0.67459829) * x1 * x2 + Float32(-0.1017) * x5 + Float32(0.1915)  * x5^2 + Float32(1.1921) * x2 * x5 + Float32(0.72633366) * x1 * x5 + Float32(0.01193 ) * x6 + Float32(0.1114) * x6 ^2 + Float32(6.00738696) * x1 * x2 * x5 * x6)
         
-        beta4 = Float32(407.009) * (1 + Float32(1.4784) * x1 + Float32(0.2269) * x1 ^2 + Float32(-0.066) * x2 + Float32(-0.1976) *x2^2 + Float32(1.00516) * x1 * x2 + Float32(0.5307) * x5 + Float32(0.1483) * x5^2 + Float32(1.0168) * x2 * x5 +  Float32(1.0646) * x1 * x5 + Float32(-0.84024895) * x6 + Float32(1.35336912) * x6 ^2 + Float32(0.93319067) * x6 * x2)
+        beta4 = Float32(407.009) * (1 + Float32(1.4784) * x1 + Float32(0.2269) * x1 ^2 + Float32(-0.066) * x2 + Float32(-0.1976) *x2^2 + Float32(-2.74281344) * x1 * x2 + + Float32(43.89663989) * x1 ^2 * x2 ^2 + Float32(0.5307) * x5 + Float32(0.1483) * x5^2 + Float32(1.0168) * x2 * x5 +  Float32(5.56638597) * x1 * x5 + Float32(1.3423) * x6 + Float32(1.3534) * x6 ^2 + Float32(2.46017622) * x1 * x6+ Float32(13.78584921) * x1 ^2 * x6 ^2 + Float32(21.98351577) * x1 * x2 * x5 * x6)
         
-        alpha = Float32(2.5867) *(1 + Float32(-1.1877) * x1 + Float32(0.700)  * x2 + Float32(0.2784) * x1 ^2  + Float32(0.2064) * x2 ^2 + Float32(-0.9759) * x1 * x2 + Float32(1.4088)  * x5 + Float32(0.7482)   * x5^2  + Float32(1.006) *  x5 * x2 + Float32(-1.2217) * x1 * x5 + Float32(0.1293002)  * x6 + Float32(0.16012527) * x6 ^2 + Float32(1.24928898) * x6 * x2  + Float32(-1.63889235) * x6 * x1 + Float32(0.42460846) * x2 * x6 + g(x1, x2, x5, x6)) 
+        alpha = Float32(2.5867) *(1 + Float32(-1.1877) * x1 + Float32(0.700)  * x2 + Float32(0.2784) * x1 ^2  + Float32(0.3064) * x2 ^2 + Float32(-1.01633878) * x1 * x2 + Float32(-0.65334445) * x1 ^2 * x2 ^2 + Float32(1.4088)  * x5 + Float32(0.7482)   * x5^2  + Float32(1.006) *  x5 * x2 + Float32(-1.10231154) * x1 * x5+ Float32(-1.52840887) * x1 ^2 * x5^2 + Float32(0.4324)  * x6 + Float32(+0.2114) * x6 ^2 + Float32(0.3) * x5 * x6 + Float32(0.4246) * x6 * x2  + Float32(0.0382146) * x6 * x1  + Float32(3.07542713)* x1 * x2 * x5 * x6) 
                 
         sigma = (1 + exp(-(ell-beta3)/beta4))^(-1)
 
